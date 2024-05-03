@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 4992382478025837989}
   - component: {fileID: 2493170526636249544}
   - component: {fileID: 8494376019891949184}
+  - component: {fileID: 5717762228158834432}
   m_Layer: 5
   m_Name: ControlPanel
   m_TagString: Untagged
@@ -254,6 +255,26 @@ MonoBehaviour:
   controlName: {fileID: 8237396401337711315}
   controlBind: {fileID: 4967308540272296852}
   controlBindName: {fileID: 1876979875896586308}
+--- !u!114 &5717762228158834432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245092375162380174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 700
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &7819396842259578944
 GameObject:
   m_ObjectHideFlags: 0

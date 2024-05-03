@@ -1,44 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject controlsMenu;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button controlsButton;
 
-    private Dictionary<KeysAction, Button> _controlsButtons;
-
-    private event Action OnPauseMenuOpened;
-    private event Action OnPauseMenuClosed;
-
+    public Button ContinueButton => continueButton;
+    public Button ControlsButton => controlsButton;
+    
     private void Awake()
     {
         ClosePauseMenu();
+        CloseControlsMenu();
+        
+        continueButton.onClick.AddListener(ClosePauseMenu);
+        controlsButton.onClick.AddListener(OpenControlsMenu);
     }
 
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
-        
-        OnPauseMenuOpened?.Invoke();
     }
 
     public void ClosePauseMenu()
     {
         pauseMenu.SetActive(false);
-        
-        OnPauseMenuClosed?.Invoke();
     }
 
-    public void OpenControlsMenu()
+    private void OpenControlsMenu()
     {
         controlsMenu.SetActive(true);
+
+        continueButton.enabled = false;
+        controlsButton.enabled = false;
     }
 
     public void CloseControlsMenu()
     {
         controlsMenu.SetActive(false);
+        
+        continueButton.enabled = true;
+        controlsButton.enabled = true;
     }
 }

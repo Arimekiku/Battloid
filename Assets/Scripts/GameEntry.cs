@@ -1,15 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameEntry : MonoBehaviour
 {
     [SerializeField] private MainHeroBehaviour mainHero;
     [SerializeField] private GameUpdater updater;
     [SerializeField] private UIHandler interfaceHandler;
-    [SerializeField] private UIControlSettings controlSettings;
+    [SerializeField] private UIControlsHandler controlsHandler;
     [SerializeField] private UIControlButton controlButtonPrefab;
     [SerializeField] private Transform controlButtonsContainer;
 
-    private ActionMap _actionMap;
+    private ActionProvider _actionProvider;
     private ButtonsFactory _buttonsFactory;
     
     private void Awake()
@@ -22,7 +23,7 @@ public class GameEntry : MonoBehaviour
 
     private void InitActionMap()
     {
-        _actionMap = new ActionMap();
+        _actionProvider = new ActionProvider();
     }
 
     private void InitFactories()
@@ -32,20 +33,12 @@ public class GameEntry : MonoBehaviour
 
     private void InitInputSystem()
     {
-        var inputProfiler = new InputProfiler();
-
-        var gameplayProfile = new UnpauseProfile(mainHero, interfaceHandler, _actionMap, inputProfiler);
-        inputProfiler.AddProfile(ProfileType.UnpauseInputProfile, gameplayProfile);
-
-        var pauseProfile = new PauseProfile(interfaceHandler, _actionMap, inputProfiler);
-        inputProfiler.AddProfile(ProfileType.PauseInputProfile, pauseProfile);
-        
-        inputProfiler.ChangeProfile(ProfileType.UnpauseInputProfile);
+        var inputProfiler = new InputProfiler(interfaceHandler, mainHero);
         updater.AddUpdatable(inputProfiler);
     }
 
     private void InitUI()
     {
-        controlSettings.Init(_actionMap, _buttonsFactory);
+        controlsHandler.Init(_actionProvider, _buttonsFactory);
     }
 }

@@ -1,12 +1,10 @@
 ﻿public abstract class InputProfile : IUpdatable
 {
-    protected readonly ActionMap Map;
-    protected readonly IInputProfileChanger ProfileChanger;
+    protected readonly ActionProvider Provider;
 
-    protected InputProfile(ActionMap map, IInputProfileChanger profileChanger)
+    protected InputProfile(ActionProvider provider)
     {
-        Map = map;
-        ProfileChanger = profileChanger;
+        Provider = provider;
     }
     
     public abstract void Update();

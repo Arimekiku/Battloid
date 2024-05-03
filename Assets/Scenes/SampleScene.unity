@@ -685,6 +685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951990301}
   - component: {fileID: 951990302}
+  - component: {fileID: 951990303}
   m_Layer: 5
   m_Name: ControlsContainer
   m_TagString: Untagged
@@ -708,8 +709,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1000.00006}
-  m_SizeDelta: {x: 1100, y: 2000}
+  m_AnchoredPosition: {x: 0, y: -225}
+  m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951990302
 MonoBehaviour:
@@ -735,6 +736,20 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 25}
   m_Constraint: 1
   m_ConstraintCount: 1
+--- !u!114 &951990303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951990300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &976413594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1330,7 @@ MonoBehaviour:
   mainHero: {fileID: 0}
   updater: {fileID: 976413596}
   interfaceHandler: {fileID: 2045355234}
-  controlSettings: {fileID: 1323206586}
+  controlsHandler: {fileID: 1323206586}
   controlButtonPrefab: {fileID: 8494376019891949184, guid: ab81179cf1564124a98d4583cb21e4db, type: 3}
   controlButtonsContainer: {fileID: 951990301}
 --- !u!1 &1323206581
@@ -1791,7 +1806,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 750891169}
-  controlsMenu: {fileID: 0}
+  controlsMenu: {fileID: 1323206581}
+  continueButton: {fileID: 2063552046}
+  controlsButton: {fileID: 398471626}
 --- !u!1 &2063552044
 GameObject:
   m_ObjectHideFlags: 0

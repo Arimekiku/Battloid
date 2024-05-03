@@ -4,7 +4,7 @@ using UnityEngine;
 public class UnpauseProfile : InputProfile
 {
     private event Action<Vector2Int> OnMovePressed;
-    private event Action OnPausePressed;
+    public event Action OnPausePressed;
     private event Action OnDashPressed;
     private event Action OnActionPressed;
     
@@ -13,29 +13,20 @@ public class UnpauseProfile : InputProfile
     private event Action OnLMBReleased;
     private event Action OnRMBPressed;
 
-    public UnpauseProfile(MainHeroBehaviour mainHero, UIHandler uiHandler, 
-        ActionMap map, IInputProfileChanger profileChanger) : base(map, profileChanger)
+    public UnpauseProfile(MainHeroBehaviour mainHero,
+        ActionProvider provider) : base(provider)
     {
-        OnPausePressed += Pause;
-        
-        //TODO: make all actions work
-
-        void Pause()
-        {
-            uiHandler.OpenPauseMenu();
-            ProfileChanger.ChangeProfile(ProfileType.PauseInputProfile);
-        }
     }
     
     public override void Update()
     {
-        if (Input.GetKeyDown(Map.GetControl(KeysAction.PauseUnpause)))
+        if (Input.GetKeyDown(Provider.GetControl(KeysAction.PauseUnpause)))
             OnPausePressed?.Invoke();
         
-        if (Input.GetKeyDown(Map.GetControl(KeysAction.Dash)))
+        if (Input.GetKeyDown(Provider.GetControl(KeysAction.Dash)))
             OnDashPressed?.Invoke();
         
-        if (Input.GetKeyDown(Map.GetControl(KeysAction.Action)))
+        if (Input.GetKeyDown(Provider.GetControl(KeysAction.Action)))
             OnActionPressed?.Invoke();
 
         var moveVector = GetMovementVector();
@@ -45,15 +36,15 @@ public class UnpauseProfile : InputProfile
 
     private Vector2Int GetMovementVector()
     {
-        bool isMovingLeft = Input.GetKey(Map.GetControl(KeysAction.MoveLeft));
+        bool isMovingLeft = Input.GetKey(Provider.GetControl(KeysAction.MoveLeft));
         int horizontalValue = 0;
-        bool isMovingDown = Input.GetKey(Map.GetControl(KeysAction.MoveDown));
+        bool isMovingDown = Input.GetKey(Provider.GetControl(KeysAction.MoveDown));
         int verticalValue = 0;
 
-        if (isMovingLeft ^ Input.GetKey(Map.GetControl(KeysAction.MoveLeft)))
+        if (isMovingLeft ^ Input.GetKey(Provider.GetControl(KeysAction.MoveLeft)))
             horizontalValue = isMovingLeft ? -1 : 1;
 
-        if (isMovingDown ^ Input.GetKey(Map.GetControl(KeysAction.MoveUp)))
+        if (isMovingDown ^ Input.GetKey(Provider.GetControl(KeysAction.MoveUp)))
             verticalValue = isMovingDown ? -1 : 1;
 
         return new Vector2Int(horizontalValue, verticalValue);

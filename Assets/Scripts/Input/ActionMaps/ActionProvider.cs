@@ -2,12 +2,12 @@
 using System.Linq;
 using UnityEngine;
 
-public class ActionMap
+public class ActionProvider
 {
     private readonly Dictionary<KeysAction, KeyCode> _actions;
     private readonly Dictionary<KeysAction, KeyCode> _defaultActions;
     
-    public ActionMap()
+    public ActionProvider()
     {
         _actions = new Dictionary<KeysAction, KeyCode>
         {
