@@ -20,7 +20,7 @@ public class PauseProfile : InputProfile
     
     public override void Update()
     {
-        if (Input.GetKeyDown(Map.GetKey(KeysAction.PauseUnpause)))
+        if (Input.GetKeyDown(Map.GetControl(KeysAction.PauseUnpause)))
             OnPauseReleased?.Invoke();
     }
 }

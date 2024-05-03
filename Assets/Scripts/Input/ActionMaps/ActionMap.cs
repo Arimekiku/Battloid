@@ -23,13 +23,18 @@ public class ActionMap
         _defaultActions = new Dictionary<KeysAction, KeyCode>(_actions);
     }
 
-    public KeyCode GetKey(KeysAction key)
+    public KeysAction[] GetKeys()
+    {
+        return _actions.Keys.ToArray();
+    }
+
+    public KeyCode GetControl(KeysAction key)
     {
         var seekedKey = _actions.Keys.FirstOrDefault(k => k == key);
         return _actions[seekedKey];
     }
 
-    public void ChangeKey(KeysAction key, KeyCode value)
+    public void ChangeControl(KeysAction key, KeyCode value)
     {
         var seekedKey = _actions.Keys.FirstOrDefault(k => k == key);
         _actions[seekedKey] = value;

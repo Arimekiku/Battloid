@@ -5,18 +5,29 @@ public class GameEntry : MonoBehaviour
     [SerializeField] private MainHeroBehaviour mainHero;
     [SerializeField] private GameUpdater updater;
     [SerializeField] private UIHandler interfaceHandler;
+    [SerializeField] private UIControlSettings controlSettings;
+    [SerializeField] private UIControlButton controlButtonPrefab;
+    [SerializeField] private Transform controlButtonsContainer;
 
     private ActionMap _actionMap;
+    private ButtonsFactory _buttonsFactory;
     
     private void Awake()
     {
         InitActionMap();
+        InitFactories();
         InitInputSystem();
+        InitUI();
     }
 
     private void InitActionMap()
     {
         _actionMap = new ActionMap();
+    }
+
+    private void InitFactories()
+    {
+        _buttonsFactory = new ButtonsFactory(controlButtonPrefab, controlButtonsContainer);
     }
 
     private void InitInputSystem()
@@ -31,5 +42,10 @@ public class GameEntry : MonoBehaviour
         
         inputProfiler.ChangeProfile(ProfileType.UnpauseInputProfile);
         updater.AddUpdatable(inputProfiler);
+    }
+
+    private void InitUI()
+    {
+        controlSettings.Init(_actionMap, _buttonsFactory);
     }
 }

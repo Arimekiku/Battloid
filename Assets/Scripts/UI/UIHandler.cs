@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject controlsMenu;
+
+    private Dictionary<KeysAction, Button> _controlsButtons;
 
     private event Action OnPauseMenuOpened;
     private event Action OnPauseMenuClosed;
@@ -25,5 +30,15 @@ public class UIHandler : MonoBehaviour
         pauseMenu.SetActive(false);
         
         OnPauseMenuClosed?.Invoke();
+    }
+
+    public void OpenControlsMenu()
+    {
+        controlsMenu.SetActive(true);
+    }
+
+    public void CloseControlsMenu()
+    {
+        controlsMenu.SetActive(false);
     }
 }

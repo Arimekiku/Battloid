@@ -29,13 +29,13 @@ public class UnpauseProfile : InputProfile
     
     public override void Update()
     {
-        if (Input.GetKeyDown(Map.GetKey(KeysAction.PauseUnpause)))
+        if (Input.GetKeyDown(Map.GetControl(KeysAction.PauseUnpause)))
             OnPausePressed?.Invoke();
         
-        if (Input.GetKeyDown(Map.GetKey(KeysAction.Dash)))
+        if (Input.GetKeyDown(Map.GetControl(KeysAction.Dash)))
             OnDashPressed?.Invoke();
         
-        if (Input.GetKeyDown(Map.GetKey(KeysAction.Action)))
+        if (Input.GetKeyDown(Map.GetControl(KeysAction.Action)))
             OnActionPressed?.Invoke();
 
         var moveVector = GetMovementVector();
@@ -45,15 +45,15 @@ public class UnpauseProfile : InputProfile
 
     private Vector2Int GetMovementVector()
     {
-        bool isMovingLeft = Input.GetKey(Map.GetKey(KeysAction.MoveLeft));
+        bool isMovingLeft = Input.GetKey(Map.GetControl(KeysAction.MoveLeft));
         int horizontalValue = 0;
-        bool isMovingDown = Input.GetKey(Map.GetKey(KeysAction.MoveDown));
+        bool isMovingDown = Input.GetKey(Map.GetControl(KeysAction.MoveDown));
         int verticalValue = 0;
 
-        if (isMovingLeft ^ Input.GetKey(Map.GetKey(KeysAction.MoveLeft)))
+        if (isMovingLeft ^ Input.GetKey(Map.GetControl(KeysAction.MoveLeft)))
             horizontalValue = isMovingLeft ? -1 : 1;
 
-        if (isMovingDown ^ Input.GetKey(Map.GetKey(KeysAction.MoveUp)))
+        if (isMovingDown ^ Input.GetKey(Map.GetControl(KeysAction.MoveUp)))
             verticalValue = isMovingDown ? -1 : 1;
 
         return new Vector2Int(horizontalValue, verticalValue);
