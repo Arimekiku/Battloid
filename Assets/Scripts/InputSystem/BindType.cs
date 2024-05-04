@@ -1,4 +1,4 @@
-﻿public enum KeysAction
+﻿public enum BindType
 {
     MoveLeft,
     MoveRight,

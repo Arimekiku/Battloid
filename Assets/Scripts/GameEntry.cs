@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameEntry : MonoBehaviour
 {
@@ -10,20 +9,24 @@ public class GameEntry : MonoBehaviour
     [SerializeField] private UIControlButton controlButtonPrefab;
     [SerializeField] private Transform controlButtonsContainer;
 
-    private ActionProvider _actionProvider;
+    private BindProvider _bindProvider;
+    private BindHandler _bindHandler;
     private ButtonsFactory _buttonsFactory;
+    private UIBindSubscriber _uiBindSubscriber;
     
     private void Awake()
     {
-        InitActionMap();
+        InitBindInputs();
         InitFactories();
-        InitInputSystem();
         InitUI();
     }
 
-    private void InitActionMap()
+    private void InitBindInputs()
     {
-        _actionProvider = new ActionProvider();
+        _bindProvider = new BindProvider();
+        _bindHandler = new BindHandler(_bindProvider);
+        
+        updater.AddUpdatable(_bindHandler);
     }
 
     private void InitFactories()
@@ -31,14 +34,9 @@ public class GameEntry : MonoBehaviour
         _buttonsFactory = new ButtonsFactory(controlButtonPrefab, controlButtonsContainer);
     }
 
-    private void InitInputSystem()
-    {
-        var inputProfiler = new InputProfiler(interfaceHandler, mainHero);
-        updater.AddUpdatable(inputProfiler);
-    }
-
     private void InitUI()
     {
-        controlsHandler.Init(_actionProvider, _buttonsFactory);
+        _uiBindSubscriber = new UIBindSubscriber(_bindProvider, interfaceHandler);
+        controlsHandler.Init(_bindProvider, _bindHandler, _buttonsFactory);
     }
 }

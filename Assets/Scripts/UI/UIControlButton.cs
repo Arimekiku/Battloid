@@ -10,14 +10,14 @@ public class UIControlButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI controlBindName;
 
     public event Action<UIControlButton> OnButtonClicked;
-    public KeysAction BindAction { get; private set; }
+    public BindType ConnectedBindType { get; private set; }
 
-    public void Init(KeysAction bindAction, KeyCode bindKey)
+    public void Init(Bind bind)
     {
-        controlName.text = bindAction.ToString();
-        controlBindName.text = bindKey.ToString();
+        controlName.text = bind.BindName;
+        controlBindName.text = bind.GetBindKey().ToString();
 
-        BindAction = bindAction;
+        ConnectedBindType = bind.GetBindType();
 
         controlBind.onClick.AddListener(OnBindButtonClicked);
     }

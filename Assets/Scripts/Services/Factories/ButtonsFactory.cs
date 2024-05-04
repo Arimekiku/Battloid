@@ -11,10 +11,10 @@ public class ButtonsFactory
         _container = container;
     }
 
-    public UIControlButton InstantiateControlButton(KeysAction withAction, KeyCode withKey)
+    public UIControlButton InstantiateControlButton(Bind bind)
     {
         var buttonInstance = Object.Instantiate(_controlButtonPrefab, _container);
-        buttonInstance.Init(withAction, withKey);
+        buttonInstance.Init(bind);
 
         return buttonInstance;
     }

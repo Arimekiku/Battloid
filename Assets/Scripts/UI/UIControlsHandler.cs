@@ -6,23 +6,23 @@ using UnityEngine;
 public class UIControlsHandler : MonoBehaviour
 {
     private UIControlButton _selectedButton;
-    private ActionProvider _actionProvider;
+    private BindHandler _bindHandler;
 
     private KeyCode _lastKeyPressed;
     private KeyCode[] _keyCodes;
     
-    public void Init(ActionProvider actionProvider, ButtonsFactory buttonsFactory)
+    public void Init(BindProvider bindProvider, BindHandler bindHandler, ButtonsFactory buttonsFactory)
     {
         _keyCodes = Enum.GetValues(typeof(KeyCode))
             .Cast<KeyCode>().Where(k => k < KeyCode.Mouse0).ToArray();
         
-        _actionProvider = actionProvider;
+        _bindHandler = bindHandler;
         
-        var actions = _actionProvider.GetKeys();
+        var binds = bindProvider.GetBinds();
 
-        foreach (var action in actions)
+        foreach (var bind in binds)
         {
-            var button = buttonsFactory.InstantiateControlButton(action, _actionProvider.GetControl(action));
+            var button = buttonsFactory.InstantiateControlButton(bind);
             button.OnButtonClicked += SelectControlButton;
         }
     }
@@ -38,7 +38,7 @@ public class UIControlsHandler : MonoBehaviour
     {
         yield return WaitForAnyKeyPress();
         
-        _actionProvider.ChangeControl(_selectedButton.BindAction, _lastKeyPressed);
+        _bindHandler.ChangeBindKey(_selectedButton.ConnectedBindType, _lastKeyPressed);
         _selectedButton.ChangeBindKey(_lastKeyPressed);
         
         _lastKeyPressed = KeyCode.None;
