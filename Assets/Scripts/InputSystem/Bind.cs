@@ -6,7 +6,7 @@ public class Bind
     public event Action PressBindAction;
     public event Action ContinuousBindAction;
     public event Action ReleaseBindAction;
-    public event Action ChangeBindAction;
+    public event Action<KeyCode> ChangeBindAction;
     
     public readonly string BindName;
     private readonly BindType _bindType;
@@ -30,7 +30,7 @@ public class Bind
     {
         _bindKey = newKeyCode;
         
-        ChangeBindAction?.Invoke();
+        ChangeBindAction?.Invoke(_bindKey);
     }
 
     public BindType GetBindType()

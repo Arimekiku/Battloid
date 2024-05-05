@@ -39,7 +39,6 @@ public class UIControlsHandler : MonoBehaviour
         yield return WaitForAnyKeyPress();
         
         _bindHandler.ChangeBindKey(_selectedButton.ConnectedBindType, _lastKeyPressed);
-        _selectedButton.ChangeBindKey(_lastKeyPressed);
         
         _lastKeyPressed = KeyCode.None;
         _selectedButton = null;

@@ -6,5 +6,5 @@
     MoveDown,
     PauseUnpause,
     Dash,
-    Action
+    Interact
 }

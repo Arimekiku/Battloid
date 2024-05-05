@@ -14,9 +14,10 @@ public class UIControlButton : MonoBehaviour
 
     public void Init(Bind bind)
     {
+        bind.ChangeBindAction += ChangeBindKey;
+        
         controlName.text = bind.BindName;
         controlBindName.text = bind.GetBindKey().ToString();
-
         ConnectedBindType = bind.GetBindType();
 
         controlBind.onClick.AddListener(OnBindButtonClicked);

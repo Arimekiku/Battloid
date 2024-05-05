@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameEntry : MonoBehaviour
 {
-    [SerializeField] private MainHeroBehaviour mainHero;
+    [SerializeField] private HeroBehaviour hero;
     [SerializeField] private GameUpdater updater;
     [SerializeField] private UIHandler interfaceHandler;
     [SerializeField] private UIControlsHandler controlsHandler;
@@ -19,13 +19,14 @@ public class GameEntry : MonoBehaviour
         InitBindInputs();
         InitFactories();
         InitUI();
+        InitPlayer();
     }
 
     private void InitBindInputs()
     {
         _bindProvider = new BindProvider();
-        _bindHandler = new BindHandler(_bindProvider);
         
+        _bindHandler = new BindHandler(_bindProvider);
         updater.AddUpdatable(_bindHandler);
     }
 
@@ -38,5 +39,11 @@ public class GameEntry : MonoBehaviour
     {
         _uiBindSubscriber = new UIBindSubscriber(_bindProvider, interfaceHandler);
         controlsHandler.Init(_bindProvider, _bindHandler, _buttonsFactory);
+    }
+
+    private void InitPlayer()
+    {
+        var heroHandler = new HeroHandler(_bindProvider, hero);
+        updater.AddUpdatable(heroHandler);
     }
 }
