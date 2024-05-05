@@ -1434,6 +1434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164e6708864a482b919283bd9d5c02bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetButton: {fileID: 1133455597}
 --- !u!1 &1574053068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,10 +1953,6 @@ PrefabInstance:
     - target: {fileID: 3025002742811707935, guid: c4a858f873089f94a8a98ed763c3df49, type: 3}
       propertyPath: m_Name
       value: Hero
-      objectReference: {fileID: 0}
-    - target: {fileID: 6920840369388387962, guid: c4a858f873089f94a8a98ed763c3df49, type: 3}
-      propertyPath: m_Interpolate
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7944465056715113923, guid: c4a858f873089f94a8a98ed763c3df49, type: 3}
       propertyPath: m_LocalPosition.x

@@ -14,7 +14,7 @@ public class UIControlButton : MonoBehaviour
 
     public void Init(Bind bind)
     {
-        bind.ChangeBindAction += ChangeBindKey;
+        bind.ChangeBindAction += () => { ChangeBindKey(bind.GetBindKey()); };
         
         controlName.text = bind.BindName;
         controlBindName.text = bind.GetBindKey().ToString();
@@ -23,7 +23,7 @@ public class UIControlButton : MonoBehaviour
         controlBind.onClick.AddListener(OnBindButtonClicked);
     }
 
-    public void ChangeBindKey(KeyCode newKey)
+    private void ChangeBindKey(KeyCode newKey)
     {
         controlBindName.text = newKey.ToString();
     }

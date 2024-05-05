@@ -4,9 +4,8 @@ using UnityEngine;
 public class Bind
 {
     public event Action PressBindAction;
-    public event Action ContinuousBindAction;
     public event Action ReleaseBindAction;
-    public event Action<KeyCode> ChangeBindAction;
+    public event Action ChangeBindAction;
     
     public readonly string BindName;
     private readonly BindType _bindType;
@@ -30,7 +29,7 @@ public class Bind
     {
         _bindKey = newKeyCode;
         
-        ChangeBindAction?.Invoke(_bindKey);
+        ChangeBindAction?.Invoke();
     }
 
     public BindType GetBindType()
@@ -42,12 +41,6 @@ public class Bind
     {
         if (Input.GetKeyDown(_bindKey))
             PressBindAction?.Invoke();
-    }
-
-    public void CheckPressed()
-    {
-        if (Input.GetKey(_bindKey))
-            ContinuousBindAction?.Invoke();
     }
 
     public void CheckJustReleased()

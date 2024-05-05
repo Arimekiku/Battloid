@@ -4,7 +4,5 @@
     MoveRight,
     MoveUp,
     MoveDown,
-    PauseUnpause,
-    Dash,
-    Interact
+    PauseUnpause
 }

@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class BindHandler : IUpdatable
 {
-    private readonly List<Bind> _defaultBinds;
+    private readonly Dictionary<BindType, KeyCode> _defaultBinds;
     private readonly BindProvider _bindProvider;
 
     public BindHandler(BindProvider bindProvider)
     {
         _bindProvider = bindProvider;
 
-        _defaultBinds = new List<Bind>(_bindProvider.GetBinds());
+        _defaultBinds = new Dictionary<BindType, KeyCode>();
+        foreach (var b in _bindProvider.GetBinds())
+            _defaultBinds.Add(b.GetBindType(), b.GetBindKey());
     }
     
     public void Update()
@@ -18,7 +20,6 @@ public class BindHandler : IUpdatable
         foreach (var bind in _bindProvider.GetBinds())
         {
             bind.CheckJustPressed();
-            bind.CheckPressed();
             bind.CheckJustReleased();
         }
     }
@@ -36,8 +37,8 @@ public class BindHandler : IUpdatable
     {
         foreach (var t in _defaultBinds)
         {
-            var bind = _bindProvider.GetBindOfType(t.GetBindType());
-            bind.ChangeBindKey(t.GetBindKey());
+            var bind = _bindProvider.GetBindOfType(t.Key);
+            bind.ChangeBindKey(t.Value);
         }
     }
 }

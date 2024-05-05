@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIControlsHandler : MonoBehaviour
 {
+    [SerializeField] private Button resetButton;
+    
     private UIControlButton _selectedButton;
     private BindHandler _bindHandler;
 
@@ -13,6 +16,8 @@ public class UIControlsHandler : MonoBehaviour
     
     public void Init(BindProvider bindProvider, BindHandler bindHandler, ButtonsFactory buttonsFactory)
     {
+        resetButton.onClick.AddListener(bindHandler.ResetToDefaults);
+        
         _keyCodes = Enum.GetValues(typeof(KeyCode))
             .Cast<KeyCode>().Where(k => k < KeyCode.Mouse0).ToArray();
         

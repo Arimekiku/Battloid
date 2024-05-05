@@ -2,8 +2,9 @@
 
 public class HeroBehaviour : MonoBehaviour
 {
+    private const float MovementSpeed = 10f;
+    
     private Rigidbody2D _body;
-    private float _movementSpeed = 10f;
     private Vector2 _movementVector;
 
     private void Awake()
@@ -18,17 +19,7 @@ public class HeroBehaviour : MonoBehaviour
 
     public void MoveHero()
     {
-        var nextPosition = _body.position + _movementVector * (_movementSpeed * Time.deltaTime);
+        var nextPosition = _body.position + _movementVector * (MovementSpeed * Time.deltaTime);
         _body.MovePosition(nextPosition);
-    }
-
-    public void Dash()
-    {
-        
-    }
-
-    public void Interact()
-    {
-        
     }
 }

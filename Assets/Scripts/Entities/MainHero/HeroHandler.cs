@@ -11,20 +11,21 @@ public class HeroHandler : IUpdatable
     {
         _heroBehaviour = heroBehaviour;
 
-        bindProvider.GetBindOfType(BindType.Dash).PressBindAction += _heroBehaviour.Dash;
-        bindProvider.GetBindOfType(BindType.Interact).PressBindAction += _heroBehaviour.Interact;
-        
         bindProvider.GetBindOfType(BindType.MoveLeft).PressBindAction += () => { SetNegativeInputValue(ref _horizontalInput, -1); };
         bindProvider.GetBindOfType(BindType.MoveLeft).ReleaseBindAction += () => { SetNegativeInputValue(ref _horizontalInput, 0); };
+        bindProvider.GetBindOfType(BindType.MoveLeft).ChangeBindAction += () => { SetNegativeInputValue(ref _horizontalInput, 0); };
 
         bindProvider.GetBindOfType(BindType.MoveRight).PressBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 1); };
         bindProvider.GetBindOfType(BindType.MoveRight).ReleaseBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 0); };
+        bindProvider.GetBindOfType(BindType.MoveRight).ChangeBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 0); };
 
         bindProvider.GetBindOfType(BindType.MoveDown).PressBindAction += () => { SetNegativeInputValue(ref _verticalInput, -1); };
-        bindProvider.GetBindOfType(BindType.MoveDown).ReleaseBindAction += () => { SetNegativeInputValue(ref _verticalInput, 0); };
+        bindProvider.GetBindOfType(BindType.MoveDown).ReleaseBindAction += () => { SetNegativeInputValue(ref _verticalInput, 0); };        bindProvider.GetBindOfType(BindType.MoveRight).ReleaseBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 0); };
+        bindProvider.GetBindOfType(BindType.MoveDown).ChangeBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 0); };
         
         bindProvider.GetBindOfType(BindType.MoveUp).PressBindAction += () => { SetPositiveInputValue(ref _verticalInput, 1); };
         bindProvider.GetBindOfType(BindType.MoveUp).ReleaseBindAction += () => { SetPositiveInputValue(ref _verticalInput, 0); };
+        bindProvider.GetBindOfType(BindType.MoveUp).ChangeBindAction += () => { SetPositiveInputValue(ref _horizontalInput, 0); };
     }
     
     public void Update()
